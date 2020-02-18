@@ -8,11 +8,16 @@ const router = new KoaRouter();
 
 let demoData = require('./datas/demo');
 
-// 1.
+
 router.get('/demo', (ctx, next) => {
   ctx.body = demoData
 });
 
+// 1. http://m.you.163.com/item/list?categoryId=1005000 ${indexCateList.id}
+// let indexCateList = require('./datas/indexCateModule.json')
+// router.get(`/item/list?categoryId=1005000`, (ctx, next) => {
+//   ctx.body = indexCateList
+// });
 
 
 

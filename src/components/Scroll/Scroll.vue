@@ -1,8 +1,8 @@
 <template>
     <div class="wrapper">
         <ul class="content">
-            <li class="navItem">推荐</li>
-            <li @click="toHome" class="navItem" v-for="(item,index) in navData" :key="index">{{item.name}}</li>
+            <li class="navItem active">推荐</li>
+            <li v-for="(item,index) in navData" :key="index">{{item.name}}</li>
         </ul>
     </div>
 </template>
@@ -13,15 +13,16 @@
   export default {
     data(){
         return{
-           navData 
+           navData:[]
         }
     },
     methods:{
-        toHome(){
-            // http://m.you.163.com/item/list?categoryId=1005000
-        }
+        
+        
+        
     },
     mounted(){
+      this.navData = navData
         new BScroll( '.scroll .wrapper', {
             scrollX: true
             // click: true
@@ -41,7 +42,7 @@
         flex-wrap nowrap
         white-space nowrap
         height 30px 
-        .navItem
+        li
           height 30px
           line-height 30px
           padding 0 8px
@@ -49,19 +50,17 @@
           font-size 14px
           margin-left 10px
           position relative
-          &:after
-            content:''
-            display block
-            width 100%
-            height 2px
-            position absolute
-            left 0
-            bottom 0
-            background #dd1a21
+          &.active
             color #dd1a21
-            // &.active
-            //   background #dd1a21
-            //   color #dd1a21
+            &:after
+                content:''
+                display block
+                width 100%
+                height 2px
+                position absolute
+                left 0
+                bottom 0
+                background #dd1a21
           &:nth-child(1)
             margin-left 15px 
     
