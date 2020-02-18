@@ -9,38 +9,27 @@
         <div class="loginBtn">登录</div>
       </div>
       <div class="scroll">
-        <div class="wrapper">
-          <ul class="content">
-            <li class="navItem">推荐</li>
-            <li class="navItem">居家生活</li>
-            <li class="navItem">服饰鞋包</li>
-            <li class="navItem">美食酒水</li>
-            <li class="navItem">个护清洁</li>
-            <li class="navItem">母婴亲子</li>
-            <li class="navItem">运动旅行</li>
-            <li class="navItem">数码家电</li>
-            <li class="navItem">全球特色</li>
-          </ul>
-        </div>
+        <Scroll/>
         <div class="toggle">
           <i class="iconfont iconjiantou-xia"></i>
         </div>
       </div>
-      <div class="swiper">
-        
-      </div>
+      <Swiper/>
   </div>
 </template>
 
 <script>
-  import BScroll from '@better-scroll/core'
-
+  import Swiper from '../../components/Swiper/Swiper'
+  import Scroll from '../../components/Scroll/Scroll'
   export default {
+    components:{Swiper,Scroll},
+    data(){
+      return {
+        isActive: true
+      }
+    },
     mounted(){
-      new BScroll('.wrapper',{
-        scrollX: true,
-        click: true
-      })
+      
     }
   }
 </script>
@@ -96,25 +85,39 @@
       font-size 12px
   .scroll  
       display flex
-    .wrapper
-      width 325px
-      height 30px 
-      overflow hidden
-      .content
-        display flex
-        flex-wrap nowrap
-        white-space nowrap
-        height 30px 
-         background #ccc
-        .navItem
-          height 30px
-          line-height 30px
-          padding 0 8px
-          color #333
-          font-size 14px
-          margin-left 10px
-          &:nth-child(1)
-            margin-left 15px 
+    // .wrapper
+    //   width 325px
+    //   height 30px 
+    //   display flex
+    //   overflow hidden
+    //   .content
+    //     display flex
+    //     flex-wrap nowrap
+    //     white-space nowrap
+    //     height 30px 
+    //     .navItem
+    //       height 30px
+    //       line-height 30px
+    //       padding 0 8px
+    //       color #333
+    //       font-size 14px
+    //       margin-left 10px
+    //       position relative
+    //       &:after
+    //         content:''
+    //         display block
+    //         width 100%
+    //         height 2px
+    //         position absolute
+    //         left 0
+    //         bottom 0
+    //         background #dd1a21
+    //         color #dd1a21
+    //         // &.active
+    //         //   background #dd1a21
+    //         //   color #dd1a21
+    //       &:nth-child(1)
+    //         margin-left 15px 
     .toggle
       text-align center
       line-height 30px
