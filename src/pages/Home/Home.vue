@@ -52,10 +52,26 @@
           </template>
           <template v-slot:content>
             <div class="middle">
-              <div class="left"></div>
+              <div class="left">
+                <a href="https://m.you.163.com/gift/newWapUserGift">
+                  <div class="title">新人专享礼包</div>
+                  <img src="https://yanxuan.nosdn.127.net/ba4d635ec94ad95b28bfab6500900659.png">
+                </a>
+              </div>
               <div class="right">
-                <div class="item-top"></div>
-                <div class="item-bottom"></div>
+                <div class="item-top">
+                  <a href="https://m.you.163.com/saleCenter/index">
+                    <div class="title">福利社</div>
+                    <div class="subTitle">今日特价</div>
+                    <img src="https://yanxuan-item.nosdn.127.net/f961b628a67e5a95150b962a48963b6d.png">
+                  </a>                
+                </div>
+                <div class="item-bottom">
+                  <a href="https://m.you.163.com/pin/item/list">
+                    <div class="title">新人拼团</div>
+                    <div class="subTitle">1元起包邮</div>
+                  </a>  
+                </div>
               </div>
             </div>
           </template>
@@ -70,18 +86,14 @@
           </template>
           <template v-slot:content>
             <div class="middle">
-              <div class="item-t">
-                <a v-for="(item,index) in 2" :key="index">
-                  <span class="name">{{item}}</span>
-                  <img src="" alt="">
+
+              <div class="item" v-for="(categoryItem,index) in categoryList" :key="index">
+                <a :href="item.targetUrl" v-for="(item,index) in categoryItem.categorys" :key="index">
+                  <div class="name">{{item.categoryName}}</div>
+                  <img :src="item.picUrl">
                 </a>
               </div>
-              <div class="item-b">
-                <a href="" v-for="(item,index) in 8" :key="index">
-                  <span class="name">{{item}}</span>
-                  <img src="" alt="">
-                </a>
-              </div>
+              
             </div>
           </template>
         </ShopCard>
@@ -92,7 +104,7 @@
             <div class="headerTitle">
               <div class="left">
                 <span>限时购</span>
-                <div class="time">00:00:00</div>
+                <CountTime/>
               </div>
               <div class="right">
                 <span class="more">更多</span>
@@ -102,11 +114,11 @@
           </template>
           <template v-slot:content>
             <div class="middle">
-              <a href="" v-for="(item,index) in 6" :key="index">
-                <img src="" alt="">
+              <a href="" v-for="(item,index) in flashSaleList" :key="index">
+                <img :src="item.picUrl">
                 <div class="price">
-                  <span>￥179</span>
-                  <s>￥199</s>
+                  <span>￥{{item.activityPrice}}</span>
+                  <s>￥{{item.originPrice}}</s>
                 </div>
               </a>
             </div>
@@ -128,12 +140,12 @@
           </template>
           <template v-slot:content>
             <div class="middle">
-              <a href="" v-for="(item,index) in 6" :key="index">
-                <img src="" alt="">
+              <a href="" v-for="(item,index) in newItemList" :key="index">
+                <img :src="item.showPicUrl" alt="">
                 <div class="name">
-                  <span>冰封住的绵密香甜，泰国金枕榴莲冻肉 300克</span>
+                  <span>{{item.name}}</span>
                 </div>
-                <span class="price">￥59</span>
+                <span class="price">￥{{item.retailPrice}}</span>
                 <div class="specialPrice">
                   <span>特价</span>
                 </div>
@@ -146,20 +158,28 @@
         <ShopCard>
           <template v-slot:content>
             <div class="middle">
-              <a href="" v-for="(item,index) in 4" :key="index">
-                <div class="item-title">无限回购榜单</div>
-                <div class="item-desc">买了又买的超值好物</div>
-                <div class="picList">
-                  <img class="pic" src="" v-for="(item,index) in 2" :key="index">
-                </div>
+              <a href="" v-for="(item,index) in sceneLightShoppingList" :key="index">
+                <div class="item-title">{{item.styleItem.title}}</div>
+                <div class="item-desc">{{item.styleItem.desc}}</div>
+                <img class="pic" :src="picItem" v-for="(picItem,index) in item.styleItem.picUrlList" :key="index">
               </a>
             </div>
           </template>
         </ShopCard>
       </div>
     </div>
-
-    <div class="test"></div>
+    <div class="bottomContainer">
+      <div class="bottom">
+        <div class="down">
+          <a href="">下载APP</a>
+          <a href="">电脑版</a>
+        </div>
+        <div class="copyright">
+          <p>网易公司版权所有 © 1997-2020</p>
+          <p>食品经营许可证：JY13301080111719</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -168,23 +188,35 @@
   import Scroll from '../../components/Scroll/Scroll'
   import ClassList from '../../components/ClassList/ClassList'
   import ShopCard from '../../components/ShopCard/ShopCard'
+  import CountTime from '../../components/CountTime/CountTime'
 
-  import bigPromotion from '../../common/datas/index.json'
+  import indexData from '../../common/datas/index.json'
 
   export default {
     components:{
       Swiper,
       Scroll,
       ClassList,
-      ShopCard
+      ShopCard,
+      CountTime
       },
     data(){
       return {
-         bigPromotionData:[]       
+         bigPromotionData: [],
+         indexActivityModule: [],
+         categoryList: [],
+         flashSaleList: [],
+         newItemList: [],
+         sceneLightShoppingList: [],
       }
     },
     mounted(){
-      this.bigPromotionData = bigPromotion.bigPromotionModule.floorList
+      this.bigPromotionData = indexData.bigPromotionModule.floorList
+      this.indexActivityModule = indexData.indexActivityModule
+      this.categoryList = indexData.categoryHotSellModule.categoryList
+      this.flashSaleList = indexData.flashSaleModule.itemList
+      this.newItemList = indexData.newItemList
+      this.sceneLightShoppingList = indexData.sceneLightShoppingGuideModule
     }
   }
 </script>
@@ -196,7 +228,8 @@
   width 100%
   height 100%
   .headerContainer
-    position absolute
+    width 100%
+    position fixed
     left 0
     top 0
     z-index 99
@@ -219,7 +252,7 @@
         box-sizing border-box
         padding 6px 0
         text-align center
-        width 221px
+        width 220px
         height 28px
         background #ededed
         border-radius 5px
@@ -236,7 +269,7 @@
           font-size 14px
       .loginBtn
         margin 3px 0 3px 8px
-        width 37px
+        width 36px
         height 20px
         color #dd1a21
         line-height 20px
@@ -375,7 +408,19 @@
         .left
           width 171px 
           height 219px
-          background #987
+          background #F9E9CF
+          a
+            display block
+            width 100%
+            height 100%
+            .title
+              color #333
+              font-size 16px
+              padding 15px 0 30px 15px
+            img 
+              width 129px
+              height 129px
+              margin-left 21px
         .right
           width 171px 
           height 219px
@@ -385,11 +430,51 @@
           .item-top
             width 100%
             height 108px
-            background #456
+            position relative
+            background #FBE2D3
+            a
+              display block
+              width 100%
+              height 100%
+              padding 10px 0 0 15px
+              box-sizing border-box
+              .title
+                height 24px
+                color #333
+                font-size 16px
+                line-height 24px
+              .subTitle
+                height 18px
+                color #7f7f7f
+                font-size 12px
+                line-height 18px
+              img 
+                position absolute
+                right 0
+                bottom 0
+                width 100px
+                height 100px
           .item-bottom
             width 100%
             height 108px
-            background #600
+            background #FFECC2
+            a
+              display block
+              width 100%
+              height 100%
+              padding 10px 0 0 15px
+              box-sizing border-box
+              .title
+                height 24px
+                color #333
+                font-size 16px
+                line-height 24px
+              .subTitle
+                height 18px
+                color #7f7f7f
+                font-size 12px  
+                line-height 18px
+
     
     .shopCard-2
       .headerTitle
@@ -401,29 +486,69 @@
       .middle
         width 100%
         height 305px
-        .item-t
-          width 100%
-          height 100px
-          display flex
-          justify-content space-between
-          a
-            display block
-            width 170px
+        .item
+          &:nth-child(1)
+            width 100%
             height 100px
-            background #456
-        .item-b
-          width 100%
-          height 205px
-          display flex
-          flex-wrap wrap
-          justify-content space-between
-          padding 5px 0
-          box-sizing border-box
-          a
-            display block
-            width 83px
-            height 90px
-            background #567
+            display flex
+            justify-content space-between
+            a
+              display block
+              width 170px
+              height 100px
+              color #333
+              position relative
+              &:nth-child(1)
+                background #f9f3e4
+              &:nth-child(2)
+                background #ebeff6
+              .name
+                font-size 14px 
+                height 21px
+                margin 33px 0 0 12px
+                position relative
+                line-height 21px
+                &:after
+                  display block
+                  content ''
+                  width 24px
+                  height 2px
+                  background #333
+                  position absolute
+                  left 0
+                  bottom -8px
+              img 
+                width 100px
+                height 100px
+                position absolute
+                right 0
+                bottom 0
+          &:nth-child(2)
+            width 100%
+            height 205px
+            display flex
+            flex-wrap wrap
+            justify-content space-between
+            padding 5px 0
+            box-sizing border-box
+            a
+              display block
+              width 83px
+              height 90px
+              background #f5f5f5
+              color #333
+              .name
+                font-size 12px 
+                displa block
+                margin-top 5px
+                text-align center
+                height 18px
+                line-height 18px
+              img 
+                width 60px
+                height 60px
+                float right
+                margin 5px 10px 0
     
     .shopCard-3
       .headerTitle
@@ -437,9 +562,8 @@
         justify-content space-between
         .left
           display flex
-          .time
-            box-sizing border-box
-            margin 2px 0 0 6px
+          span
+            margin-right 5px
         .right
           font-size 14px
           .iconfont
@@ -468,6 +592,7 @@
             span 
              font-size 14px
              color #dd1a21
+             margin-right 5px
             s 
               font-size 12px
               color #7f7f7f
@@ -552,12 +677,10 @@
             color #7f7f7f
             font-size 12px
             padding-left 5px
-          .picList
-            .pic
-              width 75px
-              height 75px
-              margin-right 2px
-              background #ddd
+          .pic
+            width 75px
+            height 75px
+            margin-right 1px
 
 
 
@@ -573,9 +696,37 @@
 
 
   
-  .test
-    height 100px
-    background #dd1a21    
-
+  .bottomContainer
+    width 100%
+    height 122px
+    margin-bottom 50px
+    padding 27px 10px 14px
+    box-sizing border-box
+    border-top 1px solid rgba(0,0,0,.15);
+    background-color #414141
+    .bottom
+      width 100%
+      height 81px
+      .down
+        padding 0 76px
+        a
+          display inline-block
+          width 86px
+          height 31px
+          border 1px solid #999
+          border-radius 4px
+          color #ffffff
+          text-align center
+          line-height 31px
+          &:first-child
+            margin-right 25px
+      .copyright
+        margin-top 13px
+        p
+          color #999
+          text-align center
+          line-height 14px
+          font-size 12px
+          padding 2px
 
 </style>

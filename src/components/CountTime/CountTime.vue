@@ -38,7 +38,7 @@ export default {
         this.m = Math.floor((leftTime / 1000 / 60) % 60)
         this.s = Math.floor((leftTime / 1000) % 60)
       }
-      console.log(this.s)
+      // console.log(this.s)
       //递归每秒调用countTime方法，显示动态时间效果
       setTimeout(this.countTime, 1000)
     },
@@ -51,11 +51,12 @@ export default {
         float left
     .date
         color #ffffff
-        width 36px
-        height 36px
+        width 18px
+        height 18px
         border-radius 4px
         background-color #333
         text-align center
-        line-height 36px
-        margin 0 10px
+        line-height 18px
+        margin 16px 5px
+        font-size 12px
 </style>
