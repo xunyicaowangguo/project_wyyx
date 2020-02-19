@@ -16,7 +16,6 @@
         </div>
       </div>
     </div>
-    <div class="empty"></div>
     <Swiper/>
     <div class="main">
       <div class="main-item">
@@ -32,17 +31,90 @@
         <span>48小时快速退款</span>
       </div>
     </div>
-    <ClassList/>
-    <div class="bigPromotionModule">
-      <div class="promotion" v-for="(promotion,index) in bigPromotionData" :key="index">
-        <div class="cellContainer" v-for="(cell,index) in promotion.cells" :key="index">
-          <a class="cell" :href="cell.schemeUrl">
-            <img :src="cell.picUrl" alt="">
-          </a>
+    <div class="footer">
+      <ClassList/>
+      <div class="bigPromotionModule">
+        <div class="promotion" v-for="(promotion,index) in bigPromotionData" :key="index">
+          <div class="cellContainer" v-for="(cell,index) in promotion.cells" :key="index">
+            <a class="cell" :href="cell.schemeUrl">
+              <img :src="cell.picUrl" alt="">
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="shopCard-1">
+        <div class="margin-top"></div>
+        <ShopCard>
+          <template v-slot:title>
+            <div class="headerTitle">
+              <span> 新人专享礼 </span>
+            </div>
+          </template>
+          <template v-slot:content>
+            <div class="middle">
+              <div class="left"></div>
+              <div class="right">
+                <div class="item-top"></div>
+                <div class="item-bottom"></div>
+              </div>
+            </div>
+          </template>
+        </ShopCard>
+      </div>
+      <div class="shopCard-2">
+        <ShopCard>
+          <template v-slot:title>
+            <div class="headerTitle">
+              <span>类目热销榜</span>
+            </div>
+          </template>
+          <template v-slot:content>
+            <div class="middle">
+              <div class="item-t">
+                <a v-for="(item,index) in 2" :key="index">
+                  <span class="name">{{item}}</span>
+                  <img src="" alt="">
+                </a>
+              </div>
+              <div class="item-b">
+                <a href="" v-for="(item,index) in 8" :key="index">
+                  <span class="name">{{item}}</span>
+                  <img src="" alt="">
+                </a>
+              </div>
+            </div>
+          </template>
+        </ShopCard>
+      </div>
+      <div class="shopCard-3">
+        <ShopCard>
+          <template v-slot:title>
+            <div class="headerTitle">
+              <div class="left">
+                <span>限时购</span>
+                <div class="time"></div>
+              </div>
+              <div class="right">
+                <span class="more">更多</span>
+                <i class="iconfont"></i>
+              </div>
+            </div>
+          </template>
+          <template v-slot:content>
+            <div class="middle">
+              <a href="" v-for="(item,index) in 6" :key="index">
+                <img src="" alt="">
+                <div class="price">
+                  <span>￥179</span>
+                  <s>￥199</s>
+                </div>
+              </a>
+            </div>
+          </template>
+        </ShopCard>
+      </div>
 
+    </div>
 
     <div class="test"></div>
   </div>
@@ -52,9 +124,17 @@
   import Swiper from '../../components/Swiper/Swiper'
   import Scroll from '../../components/Scroll/Scroll'
   import ClassList from '../../components/ClassList/ClassList'
+  import ShopCard from '../../components/ShopCard/ShopCard'
+
   import bigPromotion from '../../common/datas/index.json'
+
   export default {
-    components:{Swiper,Scroll,ClassList},
+    components:{
+      Swiper,
+      Scroll,
+      ClassList,
+      ShopCard
+      },
     data(){
       return {
          bigPromotionData:[]       
@@ -68,7 +148,7 @@
 
 <style scoped lang='stylus' rel='stylesheet/stylus'>
 @import '../../common/stylus/mixins.styl'
-// :style="{backgroundImage:url('cell.picUrl')}"
+
 #container
   width 100%
   height 100%
@@ -130,10 +210,6 @@
         height 30px
         background #bfa
     
-  .empty
-    width 100%
-    height 74px
-
   .main
     width 100%
     height 36px
@@ -151,72 +227,179 @@
         color #dd1a21
       span 
         margin-left 4px
-
-  .bigPromotionModule
-    width 100%
-    height 414px
-    background #1674e3
-    .promotion
+  .footer
+    font-size 16px
+    .bigPromotionModule
       width 100%
-      display flex
-      &:first-child
+      height 414px
+      background #1674e3
+      .promotion
         width 100%
-        height 120px
-        .cellContainer
+        display flex
+        &:first-child
+          width 100%
           height 120px
-          .cell
-            display block
-            width 100%
+          .cellContainer
             height 120px
-            img 
+            .cell
+              display block
               width 100%
               height 120px
-      &:nth-child(2)
-        margin 10px 10px 0 10px
-        height 80px
-        .cellContainer
-          width 355px
+              img 
+                width 100%
+                height 120px
+        &:nth-child(2)
+          margin 10px 10px 0 10px
           height 80px
-          .cell
-            display block
+          .cellContainer
             width 355px
             height 80px
-            img 
-              width 100%
+            .cell
+              display block
+              width 355px
               height 80px
-      &:nth-child(3)
-        margin 5px 10px 5px 10px
-        height 93px
-        .cellContainer
-          width 175px
+              img 
+                width 100%
+                height 80px
+        &:nth-child(3)
+          margin 5px 10px 5px 10px
           height 93px
-          &:first-child
-            margin-right 5px
-          .cell
-            display block
+          .cellContainer
             width 175px
             height 93px
-            img 
+            &:first-child
+              margin-right 5px
+            .cell
+              display block
               width 175px
               height 93px
-      &:nth-child(4)
-        margin 0 10px
-        height 93px
-        .cellContainer
-          width 175px
+              img 
+                width 175px
+                height 93px
+        &:nth-child(4)
+          margin 0 10px
           height 93px
-          &:first-child
-            margin-right 5px
-          .cell
-            display block
+          .cellContainer
             width 175px
             height 93px
-            img 
+            &:first-child
+              margin-right 5px
+            .cell
+              display block
               width 175px
               height 93px
-  
-  
-  
+              img 
+                width 175px
+                height 93px
+    
+    .shopCard-1
+      .margin-top 
+        width 100%
+        height 10px
+        background #eee
+      .headerTitle
+        width 100%
+        height 45px
+        padding 0 15px
+        box-sizing border-box 
+        display flex
+        justify-content center
+        span 
+          height 45px
+          display flex
+          align-items center
+          &:before
+            content ''
+            display block
+            width 16px
+            height 1px
+            background #333
+            margin-right 10px
+          &:after
+            content ''
+            display block
+            width 16px
+            height 1px
+            background #333
+            margin-left 10px
+
+      .middle
+        width 100%
+        height 219px
+        box-sizing border-box
+        display flex
+        justify-content space-between 
+        .left
+          width 171px 
+          height 219px
+          background #987
+        .right
+          width 171px 
+          height 219px
+          display flex
+          flex-direction column
+          justify-content space-between 
+          .item-top
+            width 100%
+            height 108px
+            background #456
+          .item-bottom
+            width 100%
+            height 108px
+            background #600
+    
+    .shopCard-2
+      .headerTitle
+        width 100%
+        height 50px
+        line-height 50px
+        padding 0 15px
+        box-sizing border-box 
+      .middle
+        width 100%
+        height 305px
+        .item-t
+          width 100%
+          height 100px
+          display flex
+          justify-content space-between
+          a
+            display block
+            width 170px
+            height 100px
+            background #456
+        .item-b
+          width 100%
+          height 205px
+          display flex
+          flex-wrap wrap
+          justify-content space-between
+          padding 5px 0
+          box-sizing border-box
+          a
+            display block
+            width 83px
+            height 90px
+            background #567
+    
+    .shopCard-3
+      .headerTitle
+        width 100%
+        height 50px
+        line-height 50px
+        padding 0 15px
+        box-sizing border-box 
+        // .left
+
+
+          
+
+
+
+
+
+
+
   
   .test
     height 100px

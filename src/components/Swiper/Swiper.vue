@@ -48,6 +48,7 @@
 .swiper-container 
     width 375px
     height 185px
+    margin-top 74px
     .swiper-wrapper
         width 375px
         height 185px
