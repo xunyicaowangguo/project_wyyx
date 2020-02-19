@@ -46,13 +46,14 @@
 
 <style scoped lang='stylus' rel='stylesheet/stylus'>
 .swiper-container 
-    width 100%
+    width 375px
     height 185px
     .swiper-wrapper
+        width 375px
         height 185px
         .img
             display block
-            width 100%
+            width 375px
             height 185px
            
         
