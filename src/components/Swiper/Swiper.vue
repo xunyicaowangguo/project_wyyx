@@ -51,12 +51,8 @@
     .swiper-wrapper
         width 375px
         height 185px
-        .img
+        img
             display block
             width 375px
             height 185px
-           
-        
-
- 
 </style>

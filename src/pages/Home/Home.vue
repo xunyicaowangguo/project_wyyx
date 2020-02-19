@@ -42,6 +42,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="test"></div>
   </div>
 </template>
@@ -212,6 +214,10 @@
             img 
               width 175px
               height 93px
+  
+  
+  
+  
   .test
     height 100px
     background #dd1a21    
