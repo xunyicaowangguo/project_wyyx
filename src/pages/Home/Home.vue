@@ -92,11 +92,11 @@
             <div class="headerTitle">
               <div class="left">
                 <span>限时购</span>
-                <div class="time"></div>
+                <div class="time">00:00:00</div>
               </div>
               <div class="right">
                 <span class="more">更多</span>
-                <i class="iconfont"></i>
+                <i class="iconfont iconxuanxiangqiayoujiantou"></i>
               </div>
             </div>
           </template>
@@ -113,7 +113,50 @@
           </template>
         </ShopCard>
       </div>
-
+      <div class="shopCard-4">
+        <ShopCard>
+          <template v-slot:title>
+            <div class="headerTitle">
+              <div class="left">
+                <span>新品首发</span>
+              </div>
+              <div class="right">
+                <span class="more">更多</span>
+                <i class="iconfont iconxuanxiangqiayoujiantou"></i>
+              </div>
+            </div>
+          </template>
+          <template v-slot:content>
+            <div class="middle">
+              <a href="" v-for="(item,index) in 6" :key="index">
+                <img src="" alt="">
+                <div class="name">
+                  <span>冰封住的绵密香甜，泰国金枕榴莲冻肉 300克</span>
+                </div>
+                <span class="price">￥59</span>
+                <div class="specialPrice">
+                  <span>特价</span>
+                </div>
+              </a>
+            </div>
+          </template>
+        </ShopCard>
+      </div>
+      <div class="shopCard-5">
+        <ShopCard>
+          <template v-slot:content>
+            <div class="middle">
+              <a href="" v-for="(item,index) in 4" :key="index">
+                <div class="item-title">无限回购榜单</div>
+                <div class="item-desc">买了又买的超值好物</div>
+                <div class="picList">
+                  <img class="pic" src="" v-for="(item,index) in 2" :key="index">
+                </div>
+              </a>
+            </div>
+          </template>
+        </ShopCard>
+      </div>
     </div>
 
     <div class="test"></div>
@@ -153,7 +196,7 @@
   width 100%
   height 100%
   .headerContainer
-    position fixed
+    position absolute
     left 0
     top 0
     z-index 99
@@ -388,8 +431,137 @@
         height 50px
         line-height 50px
         padding 0 15px
+        color #333
         box-sizing border-box 
-        // .left
+        display flex
+        justify-content space-between
+        .left
+          display flex
+          .time
+            box-sizing border-box
+            margin 2px 0 0 6px
+        .right
+          font-size 14px
+          .iconfont
+            font-size 14px
+            margin-left 2px
+      .middle
+        width 100%
+        height 300px
+        display flex
+        flex-wrap wrap
+        justify-content space-between
+        a
+          display block
+          width 108px
+          height 135px
+          img 
+            display block
+            width 108px
+            height 108px
+            background #336699
+          .price
+            width 100%
+            height 21px
+            line-height 21px
+            margin-top 3px
+            span 
+             font-size 14px
+             color #dd1a21
+            s 
+              font-size 12px
+              color #7f7f7f
+
+    .shopCard-4
+      .headerTitle
+        width 100%
+        height 50px
+        line-height 50px
+        padding 0 15px
+        color #333
+        box-sizing border-box 
+        display flex
+        justify-content space-between
+        .left
+          display flex
+        .right
+          font-size 14px
+          .iconfont
+            font-size 14px
+            margin-left 2px
+      .middle
+        width 100%
+        height 398px
+        display flex
+        flex-wrap wrap
+        justify-content space-between
+        a
+          display inline-block
+          width 108px
+          height 190px
+          img 
+            display block
+            width 108px
+            height 108px
+            background #f5f5f5
+            margin-bottom 3px
+          .name
+            width 108px
+            height 36px
+            font-size 12px
+            color #333
+            overflow hidden
+            white-space normal
+            span
+              line-height 18px
+          .price
+            font-size 16px
+            color #dd1a21
+          .specialPrice
+            span 
+              padding 0 4px
+              color #dd1a21
+              border 1px solid #dd1a21
+              background rgba(255,255,255,0.9)  
+              border-radius 8px
+              font-size 9px
+    
+    .shopCard-5
+      .middle
+        width 100%
+        height 268px
+        margin-top 5px
+        display flex
+        flex-wrap wrap 
+        justify-content space-between
+        a
+          width 162px
+          height 122px
+          display inline-block
+          background #f5f5f5
+          padding 9px 0 0 9px
+          .item-title
+            font-size 16px
+            height 24px
+            line-height 24px
+            color #333
+            padding-left 5px
+          .item-desc
+            height 18px
+            line-height 18px
+            color #7f7f7f
+            font-size 12px
+            padding-left 5px
+          .picList
+            .pic
+              width 75px
+              height 75px
+              margin-right 2px
+              background #ddd
+
+
+
+
 
 
           

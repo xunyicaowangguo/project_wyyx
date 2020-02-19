@@ -1,10 +1,10 @@
 <template>
   <div id="container">
       <div class="title">
-          <slot name="title"> 标题 </slot>
+          <slot name="title"></slot>
       </div>
       <div class="content">
-          <slot name="content"> 内容区 </slot>
+          <slot name="content"></slot>
       </div>
       <div class="bottom"></div>
   </div>
@@ -19,7 +19,6 @@
 #container
     width 100%
     font-size 16px
-    // .title
 
     .content
         padding  0 15px 15px
@@ -27,6 +26,6 @@
     .bottom
         width 100%
         height 10px
-        background #eee
+        background #ededed
 
 </style>

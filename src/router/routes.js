@@ -27,7 +27,7 @@ export default[
         component: Personal,
     },
     {
-        path: '/ ',
+        path: '/',
         redirect: '/home',
     },
 ]
