@@ -16,16 +16,11 @@
            navData:[]
         }
     },
-    methods:{
-        
-        
-        
-    },
     mounted(){
       this.navData = navData
-        new BScroll( '.scroll .wrapper', {
-            scrollX: true
-            // click: true
+        new BScroll( '.wrapper', {
+            scrollX: true,
+            click: true
         })
    }
   }

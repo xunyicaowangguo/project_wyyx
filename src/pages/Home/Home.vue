@@ -225,7 +225,7 @@
 @import '../../common/stylus/mixins.styl'
 
 #container
-  width 100%
+  width 375px
   height 100%
   .headerContainer
     width 100%
@@ -319,10 +319,9 @@
             height 120px
             .cell
               display block
-              width 100%
               height 120px
               img 
-                width 100%
+                width 375px
                 height 120px
         &:nth-child(2)
           margin 10px 10px 0 10px
