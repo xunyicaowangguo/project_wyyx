@@ -6,10 +6,7 @@
             </div>
         </div>
         <!-- 如果需要分页器 -->
-        <div class="swiper-pagination"></div>
-        
-        
-        
+        <div class="swiper-pagination"></div>        
     </div>
 </template>
 
@@ -26,20 +23,20 @@
         },
         mounted(){
             this.swiperImg = swiperImg
-            new Swiper('.swiper-container',{
-                direction: 'horizontal', // 垂直切换选项
-                observer: true,
-                observeParents: true,
-                loop: true, // 循环模式选项
-                autoplay: true,
-                // 如果需要分页器
-                pagination: {
-                    el: '.swiper-pagination',
-                    // custom:   //自定义样式
-                },
-                
-               
-          })
+            this.$nextTick(()=>{
+                new Swiper('.swiper-container',{
+                    direction: 'horizontal', // 垂直切换选项
+                    observer: true,
+                    observeParents: true,
+                    loop: true, // 循环模式选项
+                    autoplay: true,
+                    // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                        // custom:   //自定义样式
+                    },
+                })
+            })           
       }
   }
 </script>
