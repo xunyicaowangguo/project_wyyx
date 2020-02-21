@@ -1,8 +1,8 @@
 <template>
     <div class="wrapper">
         <ul class="content">
-            <li class="navItem" :class="{active:activeIndex==index?true:false}">推荐</li>
-            <li v-for="(item,index) in navData" :key="index">{{item.name}}</li>
+            <li class="navItem" @click="activeName='推荐'"  :class="{active:activeName=='推荐'?true:false}">推荐</li>
+            <li @click="activeName=item.name" :class="{active:activeName==item.name?true:false}" v-for="(item) in navData" :key="item.name">{{item.name}}</li>
         </ul>
     </div>
 </template>
@@ -13,16 +13,19 @@
   export default {
     data(){
         return{
-           navData:[]
+           navData:[],
+           activeName:'推荐'
         }
     },
     mounted(){
       this.navData = navData
-      new BScroll( '.wrapper', {
-          scrollX: true,
-          click: true
-      })
-   }
+      this.$nextTick(()=>{
+        new BScroll( '.wrapper', {
+            scrollX: true,
+            click: true
+        })
+      })        
+    }
   }
 </script>
 
@@ -33,7 +36,6 @@
       height 30px 
       display flex
       overflow hidden
-      z-index 9
       .content
         display flex
         flex-wrap nowrap

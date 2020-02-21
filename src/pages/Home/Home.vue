@@ -278,7 +278,9 @@
         border-radius 5px
         font-size 12px
     .scroll
-      position relative  
+      position relative
+      width 375px
+      height 30px  
       .toggle
         text-align center
         line-height 30px
