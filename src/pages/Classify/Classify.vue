@@ -1,7 +1,7 @@
 <template>
   <div id="classContainer">
       <div class="header">
-        <div class="search">
+        <div class="search" @click="$router.push('/search')">
           <i class="iconfont iconsearch"></i>
           <span>搜索商品，共22029款好物</span>
         </div>

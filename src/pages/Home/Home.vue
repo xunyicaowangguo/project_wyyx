@@ -3,7 +3,7 @@
     <div class="headerContainer">
       <div class="header">
         <a class="logo"></a>
-        <div class="topSearchInput">
+        <div class="topSearchInput" @click="$router.push('/search')">
           <i class="iconfont iconsearch"></i>
           <span class="placeholder">搜索商品，共20259款好物</span>
         </div>
@@ -293,14 +293,13 @@
         top 0
 
   .main
-    width 100%
+    width 345px
     height 36px
     display flex
     align-items center
     padding 0 15px
-    box-sizing border-box 
     .main-item
-      width 228px
+      width 115px
       height 18px
       line-height 18px
       font-size 12px
@@ -309,6 +308,7 @@
         color #dd1a21
       span 
         margin-left 4px
+
   .footer
     font-size 16px
     .bigPromotionModule

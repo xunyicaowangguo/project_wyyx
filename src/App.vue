@@ -2,7 +2,7 @@
   <div id="container">
     <!-- 显示路由组件 -->
     <router-view></router-view>
-    <FooterGuide/>
+    <FooterGuide v-if="$route.path !== '/personal' && $route.path !== '/search'"/>
   </div>
 </template>
 

@@ -1,10 +1,10 @@
 <template>
   <div id="container">
     <div class="header">
-      <i class="iconfont iconhome1"></i>
+      <i class="iconfont iconhome1" @click="$router.push('/home')"></i>
       <div class="title">值得买</div>
       <i class="iconfont icongouwuche3"></i>
-      <i class="iconfont iconsearch"></i>
+      <i class="iconfont iconsearch" @click="$router.push('/search')"></i>
     </div>
     <div class="swiperTabContainer">
       <div class="swiperTabTitle">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  // import Swiper from 'swiper'
+  import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
     data(){
@@ -60,13 +60,14 @@
     },
     mounted(){
       this.$nextTick(()=>{
-        // new Swiper('.swiper-container',{
-        //   observer: true,
-        //   observeParents: true,
-        //   pagination: {
-        //       el: '.swiper-pagination',
-        //   },
-        // })
+        new Swiper('.swiper-container',{
+          observer: true,
+          observeParents: true,
+          slidesPerView : 4,
+          pagination: {
+              el: '.swiper-pagination',
+          },
+        })
     })             
     }
 }
