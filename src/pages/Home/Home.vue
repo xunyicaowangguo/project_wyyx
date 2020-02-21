@@ -277,15 +277,19 @@
         border: 1px solid #DD1A21;
         border-radius 5px
         font-size 12px
-    .scroll  
-        display flex
+    .scroll
+      position relative  
       .toggle
         text-align center
         line-height 30px
         width 50px
         height 30px
-        background #bfa
-    
+        background #fff
+        padding-left 30px
+        position absolute
+        right 0
+        top 0
+
   .main
     width 100%
     height 36px

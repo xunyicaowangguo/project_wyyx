@@ -99,12 +99,11 @@
     position relative
     .left
       width 81px
-      height 533px
+      height 534px
       right-border-1px(#ddd)
       padding 20px 0
       .cateList
         width 81px
-        float left
         .cateItem
           width 81px
           height 25px
@@ -135,7 +134,7 @@
       right 0
       top 44px
       width 294px
-      height 573px
+      height 574px
       margin-left 81px
       box-sizing border-box
       padding 15px 15px 10px

@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <ul class="content">
-            <li class="navItem active">推荐</li>
+            <li class="navItem" :class="{active:activeIndex==index?true:false}">推荐</li>
             <li v-for="(item,index) in navData" :key="index">{{item.name}}</li>
         </ul>
     </div>
@@ -18,20 +18,22 @@
     },
     mounted(){
       this.navData = navData
-        new BScroll( '.wrapper', {
-            scrollX: true,
-            click: true
-        })
+      new BScroll( '.wrapper', {
+          scrollX: true,
+          click: true
+      })
    }
   }
 </script>
 
 <style scoped lang='stylus' rel='stylesheet/stylus'>
     .wrapper
+      position absolute
       width 325px
       height 30px 
       display flex
       overflow hidden
+      z-index 9
       .content
         display flex
         flex-wrap nowrap
