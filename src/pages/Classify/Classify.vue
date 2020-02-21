@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="classContainer">
       <div class="header">
         <div class="search">
           <i class="iconfont iconsearch"></i>
@@ -42,6 +42,7 @@
 <script>
   import cateNav from '../../common/datas/cateNavDatas.json'
   import cateLists from '../../common/datas/cateLists.json'
+  // import BScroll from '@better-scroll/core'
   export default {
     data(){
       return {
@@ -58,6 +59,7 @@
     mounted(){
       this.cateNav = cateNav.categoryL1List
       this.cateLists = cateLists
+          
     }
   }
 </script>
@@ -66,7 +68,7 @@
 
 @import '../../common/stylus/mixins.styl'
 
-#container
+#classContainer
   .header
     width 345px
     height 44px
@@ -139,7 +141,7 @@
       box-sizing border-box
       padding 15px 15px 10px
       .goodsDesc
-        width 100%
+        width 264px
         position absolute
         left 15px
         top 15px
@@ -157,13 +159,11 @@
             display flex
             flex-wrap wrap
             .goodItem
-              // background #666
-              // display inline-block
               margin-bottom 4px
               width 72px
               height 108px
               &:nth-child(3n+2)
-                margin 0 17px
+                margin 0 17px 4px
               img
                 display block
                 width 72px

@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="homeContainer">
     <div class="headerContainer">
       <div class="header">
         <a class="logo"></a>
@@ -224,7 +224,7 @@
 <style scoped lang='stylus' rel='stylesheet/stylus'>
 @import '../../common/stylus/mixins.styl'
 
-#container
+#homeContainer
   width 375px
   height 100%
   .headerContainer
@@ -330,8 +330,9 @@
                 width 375px
                 height 120px
         &:nth-child(2)
-          margin 10px 10px 0 10px
+          padding 10px 10px 0 10px
           height 80px
+          width 355px
           .cellContainer
             width 355px
             height 80px
@@ -340,11 +341,12 @@
               width 355px
               height 80px
               img 
-                width 100%
+                width 355px
                 height 80px
         &:nth-child(3)
           margin 5px 10px 5px 10px
           height 93px
+          width 355px
           .cellContainer
             width 175px
             height 93px
@@ -360,6 +362,7 @@
         &:nth-child(4)
           margin 0 10px
           height 93px
+          width 355px
           .cellContainer
             width 175px
             height 93px
