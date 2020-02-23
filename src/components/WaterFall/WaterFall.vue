@@ -1,196 +1,202 @@
+/** 
+  引用该组件，组件设置ref名称，通过this.$refs.名称.setData(),来进行数据传递
+*/
 <template>
-  <div class="about">
-    <p>瀑布流，实现瀑布流布局，当删除瀑布流中的一个数据时，剩余的自动重新布局</p>
-    <div class="page">
-      <div class="content" v-for="(item, index) in list" :key="item.id" :style="{width: waterfallW + 'px', height: item.imgH + 'px', left: item.left + 'px', top: item.top + 'px'}" ref="col" @click="clickMe(index)">
-        <img :src="item.image" alt="">
+  <div class="water-fall">
+    <div class="wf-main" :style="{ height: mainStyle.height }">
+      <div
+        class="wf-list"
+        v-for="(item, index) in list"
+        :key="index"
+        :style="item.style"
+      >
+        <div
+          class="wf-content"
+          v-press="onPress"
+          :data-index="index"
+          :data-id="item.id"
+        >
+          <div class="img-box" :style="{ 'padding-bottom': item.ratio }">
+            <img class="wf-img" :src="item.pic" />
+          </div>
+        </div>
+        <div class="wf-shade" v-if="item.showShade"></div>
       </div>
+    </div>
+    <div class="preload">
+      <div
+        class="preload-list"
+        v-for="item in preloadList"
+        :key="item.id"
+        :style="{ width: listW + 'px' }"
+      >
+        <div class="img-box" :style="{ 'padding-bottom': item.ratio }">
+          <img class="wf-img" :src="item.pic" />
+        </div>
+      </div>
+      <div class="gap"></div>
     </div>
   </div>
 </template>
 <script>
-const gap = 10;
-let leftH = 0;
-let rightH = 0;
-// const itemTop = [];
+import { clone } from '@/utils';
+
 export default {
+  name: 'water-fall',
+  props: {
+    initData: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
   data() {
-    const list = [
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 122,
-        title: '标题只有1行哦长砍',
-        desc: 'Bon Cake(徐家汇店)这家店不要条好吃啊',
-        praiseNum: 322,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 334,
-        title: '标题只有1行哦长砍标题只有1行哦长砍标题只有1行哦长砍',
-        desc:
-          'Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店',
-        praiseNum: 32232,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 173,
-        title: '标题只有1行哦长砍',
-        desc:
-          'Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店',
-        praiseNum: 32,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 225,
-        title: '标题只有1行哦长砍',
-        desc: 'Bon Cake(徐家汇店)这家店',
-        praiseNum: 32,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 89,
-        title: '标题只有1行哦长砍',
-        desc:
-          'Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店Bon Cake(徐家汇店)这家店',
-        praiseNum: 32,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-      {
-        image:
-          'http://img-agc.iqianggou.com/0a62fca1eeab88e894b93539c35446ec!180x180',
-        imgH: 112,
-        title: '标题只有1行哦长砍',
-        desc: 'Bon Cake(徐家汇店)这家店',
-        praiseNum: 32,
-        top: 0,
-        left: 0,
-        itemH: 0,
-      },
-    ];
     return {
-      list,
-      list1: [],
-      list2: [],
-      initLeft: '',
-      waterfallW: '',
-      screenWidth: document.body.clientWidth, // 屏幕宽度
+      list: [],
+      preloadList: [],
+      listW: 0,
+      gapW: 0,
+      gapH: 0,
+      startL: { x: 0, y: 0 },
+      startR: { x: 0, y: 0 },
+      mainStyle: '',
     };
   },
-  computed: {},
-  created() {
-    this.waterfallW = (this.screenWidth - 30) / 2;
-    this.initLeft = (this.screenWidth - this.waterfallW) / 2;
-  },
   mounted() {
-    const nodeList = this.$refs.col;
-    this.doSort(nodeList);
+    this.$nextTick(() => {
+      this.getGapSize('init');
+    });
   },
   methods: {
-    doSort(nodeList) {
-      for (let i = 0; i < nodeList.length; i++) {
-        nodeList[i].style.position = 'absolute';
-        const domHeight = nodeList[i].clientHeight;
-        let top;
-        let left;
-        let itemH;
-        if (leftH > rightH) {
-          left = gap * 2 + this.waterfallW;
-          top = rightH + gap;
-          itemH = domHeight;
-          rightH += gap + domHeight;
-        } else {
-          left = gap;
-          top = leftH + gap;
-          itemH = domHeight;
-          leftH += gap + domHeight;
-        }
-        this.list[i].top = top;
-        this.list[i].left = left;
-        this.list[i].itemH = itemH;
-        this.list[i].itemW = this.waterfallW;
+    getGapSize(data = [], type = 'push', index = 0) {
+      const gap = this.$el.querySelector('.gap');
+      const rect = gap.getBoundingClientRect();
+      this.gapW = rect.width;
+      this.gapH = rect.height;
+      this.listW = (this.gapW - this.gapH) / 2;
+      this.startR.x = this.listW + this.gapH;
+      if (data === 'init') {
+        return;
       }
+      this.setData(data, type, index);
     },
-    clickMe(index) {
-      // this.list.splice(index, 1);
-      const renderedList = this.list.slice(0, index);
-      const afreshRenderList = this.list.slice(index + 1);
-      if (this.list[index].left > gap) {
-        rightH = this.list[index].top - gap; // 被删除数据列的无需重排数据的高度
-        leftH = this.checkHeight(renderedList, 'left');
-      } else {
-        rightH = this.checkHeight(renderedList, 'right');
-        leftH = this.list[index].top - gap;
+    // push 增加 reset 重置
+    setData(data, type, index) {
+      if (!this.gapH) {
+        setTimeout(() => {
+          this.getGapSize(data, type, index);
+        }, 1);
+        return;
       }
-      const newList = this.restartSort(afreshRenderList);
-      this.list = [...renderedList, ...newList];
-    },
-    // 查找不需要重新排列的数据中非被删除列的高度
-    checkHeight(list, col) {
-      let needHeight = 0;
-      for (let i = 0; i < list.length; i++) {
-        if (col == 'left' && list[i].left == gap && list[i].top > needHeight) {
-          needHeight = list[i].top + list[i].itemH;
-        } else if (
-          col == 'right' &&
-          list[i].left > gap &&
-          list[i].top > needHeight
-        ) {
-          needHeight = list[i].top + list[i].itemH;
-        }
+      const list = clone(data);
+      for (let item of list) {
+        item.ratio = (item.height * 100) / item.width + '%';
       }
-      return needHeight;
-    },
-    //重新排列列表中被删除数据之后的所有数据
-    restartSort(list) {
-      const newList = list;
-      newList.forEach(function(item) {
-        if (leftH > rightH) {
-          item.left = gap * 2 + item.itemW;
-          item.top = rightH + gap;
-          rightH += gap + item.itemH;
-        } else {
-          item.left = gap;
-          item.top = leftH + gap;
-          leftH += gap + item.itemH;
+      this.preloadList = list;
+      this.$nextTick(() => {
+        const preload = this.$el.querySelectorAll('.preload-list');
+        for (let i = 0; i < preload.length; i++) {
+          let rect = preload[i].getBoundingClientRect();
+          list[i]['vw'] = rect.width;
+          list[i]['vh'] = rect.height;
         }
+        this.addToList(list, type, index);
+        this.preloadList = [];
       });
-      return newList;
+    },
+    addToList(list, type) {
+      const startL = { ...this.startL };
+      const startR = { ...this.startR };
+      const gapH = this.gapH;
+      if (type == 'reset') {
+        startL.y = 0;
+        startR.y = 0;
+      }
+      for (let item of list) {
+        let [left, top] = [0, 0];
+        if (startL.y < startR.y) {
+          left = startL.x;
+          top = startL.y;
+          startL.y = startL.y + item.vh + gapH;
+        } else {
+          left = startR.x;
+          top = startR.y;
+          startR.y = startR.y + item.vh + gapH;
+        }
+        item.style = {
+          left: `${left}px`,
+          top: `${top}px`,
+        };
+      }
+      this.startL = startL;
+      this.startR = startR;
+      this.mainStyle = {
+        height: Math.max(startL.y, startR.y) + 'px',
+      };
+      this.list = list;
+    },
+    onPress(el) {
+      // console.log(el);
+      const curIndex = el.getAttribute('data-index');
+      const article = { ...this.list[curIndex] };
+      article.showShade = true;
+      this.list.splice(curIndex, 1, article);
     },
   },
 };
 </script>
 <style lang="stylus" scoped>
-.page {
+.water-fall {
   position: relative;
+  padding-top: 10px;
+  z-index: 1;
+  margin: 0 10px;
+}
+.wf-main {
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+.wf-list, .preload-list {
+  position: absolute;
+  width: 50%;
+  overflow: hidden;
+  .wf-content {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .img-box {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .wf-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+.wf-shade {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, .8);
 }
-.content {
-  position: fixed;
-  top: 100%;
-}
-.content img {
-  display: block;
+.preload {
+  position: absolute;
+  left: -1000px;
+  top: -1000px;
   width: 100%;
-  height: 100%;
+  visibility: hidden;
+}
+.gap {
+  width: 100%;
+  height: 10px;
 }
 </style>

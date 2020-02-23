@@ -29,6 +29,14 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      },
+      '/buy': {
+        target: 'https://m.you.163.com',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/buy': ''
+        }
       }
     }
   }

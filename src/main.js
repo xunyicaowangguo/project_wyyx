@@ -4,8 +4,11 @@ import App from './App.vue'
 import 'lib-flexible/flexible'
 //引入路由器
 import router from './router'
+import * as API from './api'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$API = API
 
 new Vue({
   render: h => h(App),

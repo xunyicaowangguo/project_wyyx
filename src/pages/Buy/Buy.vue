@@ -16,24 +16,25 @@
         <a class="swiperHref" href="">
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="(imgItem,index) in 8" :key="index">
+              <div class="swiper-slide" v-for="(buyNavItem,index) in buyNavList" :key="index">
                 <div class="swiper-group">
-                  <a class="swiperItem" href="">
+                  <a class="swiperItem" :href="buyNavItem[0].columnUrl">
                     <div class="swiperImg">
-                      <img src="">
+                      <img :src="buyNavItem[0].picUrl">
                     </div>
                     <div class="detail">
-                      <div class="mainText">9.9超值</div>
-                      <div class="descText">定价直降</div>
+                      <div class="mainText">{{buyNavItem[0].mainTitle}}</div>
+                      <div class="descText">{{buyNavItem[0].viceTitle}}</div>
                     </div>
                   </a>
-                  <a class="swiperItem swiperItem-2" href="">
+                   <!-- v-for="(buyNavItem,index) in buyNavList" :key="index" -->
+                  <a class="swiperItem swiperItem-2" :href="buyNavItem[1].columnUrl">
                     <div class="swiperImg">
-                      <img src="">
+                      <img :src="buyNavItem[1].picUrl">
                     </div>
                     <div class="detail">
-                      <div class="mainText">晒单</div>
-                      <div class="descText">入选就有红包</div>
+                      <div class="mainText">{{buyNavItem[1].mainTitle}}</div>
+                      <div class="descText">{{buyNavItem[1].viceTitle}}</div>
                     </div>
                   </a>
                 </div>
@@ -46,23 +47,23 @@
       </div>
     </div>
     <div class="main">
-      <!-- <WaterFall/> -->
+      <WaterFall/>
     </div>
   </div>
 </template>
 
 <script>
-  // import WaterFall from '../../components/WaterFall/WaterFall'
+  import WaterFall from '../../components/WaterFall/WaterFall'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
-    // components:{WaterFall},
+    components:{WaterFall},
     data(){
       return{
-
+        buyNavList:[],
       }
     },
-    mounted(){
+    async mounted(){
       this.$nextTick(()=>{
         new Swiper('.swiper-container',{
           observer: true,
@@ -72,7 +73,11 @@
               el: '.swiper-pagination',
           },
         })
-    })             
+      })
+      
+      this.buyNavList = await this.$API.getBuyNavList()
+      // eslint-disable-next-line no-console
+      console.log(this.buyNavList)
     }
 }
 </script>

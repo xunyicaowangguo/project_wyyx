@@ -20,7 +20,9 @@
     </div>
     <div class="main">
       <div class="shopcar">
-        <div class="shopcarimg"></div>
+        <div class="shopcarimg">
+          <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noCart-d6193bd6e4.png">
+        </div>
         <div class="text">去添加点什么吧</div>
       </div>
       <div class="login" @click="$router.push('/personal')">登录</div>
@@ -80,9 +82,10 @@
       .shopcarimg
         width 124px
         height 124px
-        background-color #666
-        background-image url('http://m.you.163.com//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noCart-d6193bd6e4.png?imageView&type=webp') 
         margin 0 auto
+        img 
+          width 124px
+          height 124px
       .text
         color #999999
         font-size 14px
