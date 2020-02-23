@@ -45,14 +45,18 @@
         </a>
       </div>
     </div>
-    <div class="main">瀑布流布局</div>
+    <div class="main">
+      <!-- <WaterFall/> -->
+    </div>
   </div>
 </template>
 
 <script>
+  // import WaterFall from '../../components/WaterFall/WaterFall'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
+    // components:{WaterFall},
     data(){
       return{
 
@@ -80,7 +84,11 @@
       height 50px
       padding 0 12px 0 13px
       line-height 50px
-      position relative
+      background #fff
+      position fixed
+      left 0
+      top 0
+      z-index 99
       .iconfont
         font-size 22px
         color #333
@@ -103,6 +111,7 @@
       height 343px
       background #eee
       position relative
+      margin-top 50px
       .swiperTabTitle
         width 375px
         height 259px
@@ -193,6 +202,6 @@
     .main
       background #bfa
       width 355px
-      height 300px
+      height 900px
       padding 15px 10px 50px
 </style>
