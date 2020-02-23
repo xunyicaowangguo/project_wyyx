@@ -27,7 +27,6 @@
                       <div class="descText">{{buyNavItem[0].viceTitle}}</div>
                     </div>
                   </a>
-                   <!-- v-for="(buyNavItem,index) in buyNavList" :key="index" -->
                   <a class="swiperItem swiperItem-2" :href="buyNavItem[1].columnUrl">
                     <div class="swiperImg">
                       <img :src="buyNavItem[1].picUrl">
@@ -46,14 +45,13 @@
         </a>
       </div>
     </div>
-    <div class="main">
-      <WaterFall/>
-    </div>
+    <WaterFall ref="waterfall"/>
   </div>
 </template>
 
 <script>
   import WaterFall from '../../components/WaterFall/WaterFall'
+  import waterFallData from '../../common/datas/waterFall.json'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
@@ -61,6 +59,7 @@
     data(){
       return{
         buyNavList:[],
+        waterFallData:[],
       }
     },
     async mounted(){
@@ -77,7 +76,13 @@
       
       this.buyNavList = await this.$API.getBuyNavList()
       // eslint-disable-next-line no-console
-      console.log(this.buyNavList)
+      // console.log(this.buyNavList)
+      this.waterFallData = waterFallData.data
+      // eslint-disable-next-line no-console
+      console.log(this.waterFallData)
+      this.$refs.waterfall.setData(this.waterFallData)
+      // eslint-disable-next-line no-console
+      console.log(this.$refs.waterfall)
     }
 }
 </script>
