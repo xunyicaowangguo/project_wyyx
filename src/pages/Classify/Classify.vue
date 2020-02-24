@@ -173,7 +173,7 @@
             // overflow hidden
             // float right
             width 264px
-            // height 800px
+            height 800px
             .pic
               width 264px
               height 96px
