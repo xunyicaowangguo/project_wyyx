@@ -47,7 +47,9 @@
     </div>
     <!-- <WaterFall ref="waterfall"/> -->
     <div class="waterfallwrap">
+      <!-- <img class="firstImg" src="https://yanxuan.nosdn.127.net/87f3077c32a6946ae644f6a6a8205fc1.png?imageView&thumbnail=345y191.66666666666669&quality=95"> -->
       <waterfall :col='col' :width="width" :gutterWidth="gutterWidth" :data="data" @loadmore="loadmore" @scroll="scroll">
+        <img class="firstImg" src="https://yanxuan.nosdn.127.net/87f3077c32a6946ae644f6a6a8205fc1.png?imageView&thumbnail=345y191.66666666666669&quality=95">
         <template>
           <div class="cell-item" v-for="(item, index) in data" :key="index">
             <img :src="item.topics[0].picUrl" alt="" class="img">
@@ -283,6 +285,11 @@
         width 375px
         padding  15px 10px 0
         box-sizing border-box
+        .firstImg
+          width 172px
+          height 95px
+          border-radius 8px
+          margin 0 10px 10px 0
         .cell-item
             width 172px
             background-color #fff
