@@ -7,18 +7,19 @@
         <div class="userBox">
             <div class="userBoxContent">
                 <div class="mailNumber">
-                    <input type="text" placeholder="邮箱账号">
-                    <!-- <span style="color: red;" v-show="errors.has('myemail')">{{ errors.first('myemail') }}</span> -->
+                    <input type="text" placeholder="邮箱账号" v-model="email" name="myemail" v-validate="'required|email'">
+                    <span style="color: red;" v-show="errors.has('myemail')">{{ errors.first('myemail') }}</span>
                 </div>
                 <div class="pwd">
-                    <input type="password" placeholder="密码">
+                    <input type="password" placeholder="密码" v-model="password" name="password" v-validate="'required|password'">
+                    <span style="color: red;" v-show="errors.has('password')">{{ errors.first('password') }}</span>
                 </div>
                 <div class="question">
                     <a href="https://zc.reg.163.com/m/regInitialized?pd=yanxuan&pkid=QyOtTGv&pkht=you.163.com&tp=2&as=3&curl=http%3A%2F%2Fm.you.163.com%2Fucenter">注册账号</a>
                     <a href="https://reg.163.com/resetpwd/index.do">忘记密码</a>
                 </div>
                 <div class="loginBox">
-                    <div class="login">登录</div>
+                    <button class="login" @click="login">登录</button>
                 </div>
             </div>
         </div>
@@ -32,17 +33,24 @@
 
 <script>
   export default {
-      data(){
-          return{
-            myemail:'',
-            pwd:'',
-          }
+    data(){
+        return{
+        email:'',
+        password:'',
+        }
       },
-    async mounted(){
-        // const success = await this.$validator.validateAll()
-        // if(success){
-
-        // }
+    methods:{
+        async login(){
+            // 1. 前端验证
+            const success = await this.$validator.validateAll() // 对所有表单项进行验证
+            if(success){ // 前端验证成功
+                // 2. 后端验证逻辑.....................          
+                alert('登录成功')
+                this.$router.replace('/home')
+            }else {// 前端验证失败
+                alert('前端验证失败')
+            }
+        }
     }
 
   }
@@ -109,6 +117,8 @@
                         line-height 45px
                         font-size 14px
                         border-radius 4px
+                        border none 
+                        outline none
 
 
         .otherWay   

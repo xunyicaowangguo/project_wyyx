@@ -83,8 +83,8 @@
       return{
         buyNavList:[],
         // waterFallData:[],
-        width:355,
-        gutterWidth:11,
+        width:172,
+        gutterWidth:10,
         data:[],
         col:2
       }
@@ -280,29 +280,26 @@
     
     .waterfallwrap
         background #eee
-        width 100%
-        height 100%
+        width 375px
         padding  15px 10px 0
         box-sizing border-box
         .cell-item
-            margin 3px
-            display inline-block
-            width 170px
+            width 172px
             background-color #fff
             border-radius 8px
             overflow hidden
             margin-bottom 10px
             .img
-                width 170px
+                width 172px
             .line1
-                width 170px
+                width 172px
                 box-sizing border-box
                 padding 9px 8px 0
                 font-size 14px
                 line-height 20px
                 color #333
             .line2
-                width 170px
+                width 172px
                 height 45px
                 box-sizing border-box
                 padding 8px 8px 6px
@@ -310,7 +307,6 @@
                 justify-content space-between
                 align-items center
                 .userInfo
-                    // width 52px
                     height 24px
                     display flex
                     .avt
@@ -319,7 +315,6 @@
                         border 1px solid #d9d9d9
                         border-radius 50%
                     .name
-                        // width 24px
                         height 24px
                         color #7f7f7f
                         font-size 12px
@@ -327,7 +322,6 @@
                         margin-left 4px
                         overflow hidden
                 .see
-                    // width 50px
                     height 29px
                     display flex
                     display flex

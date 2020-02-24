@@ -2,7 +2,12 @@
   <div id="container">
     <!-- 显示路由组件 -->
     <router-view></router-view>
-    <FooterGuide v-if="$route.path !== '/personal' && $route.path !== '/personal/middle' && $route.path !== '/search'"/>
+    <FooterGuide v-if="$route.path !== '/personal' 
+                      && $route.path !== '/personal/middle' 
+                      && $route.path !== '/personal/phoneLogin' 
+                      && $route.path !== '/personal/mailLogin' 
+                      && $route.path !== '/search'"
+    />
   </div>
 </template>
 

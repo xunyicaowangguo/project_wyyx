@@ -9,10 +9,12 @@
                     <form>
                         <div class="phoneLogin">
                             <div class="phonenumber">
-                                <input name="phone" placeholder="请输入手机号">
+                                <input type="text" name="phone" placeholder="请输入手机号" v-model="phone" v-validate="'required|phone'">
+                                <span style="color: red;" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
                             </div>
                             <div class="verificode">
-                                <input type="tel" placeholder="请输入短信验证码">
+                                <input type="tel" placeholder="请输入短信验证码" name="code" v-model="code" v-validate="'required|code'">
+                                <span style="color: red;" v-show="errors.has('code')">{{ errors.first('code') }}</span>
                                 <button>获取验证码</button>
                             </div>
                             <div class="question">
@@ -20,7 +22,7 @@
                                 <span>使用密码验证登录</span>
                             </div>
                             <div class="loginBox">
-                                <div class="login">登录</div>
+                                <button @click="login" class="login">登录</button>
                             </div>
                             <div class="agree">
                                 <input class="agreeSelect" type="checkbox">
@@ -40,7 +42,25 @@
 
 <script>
   export default {
-    
+    data(){
+        return{
+            phone:'',
+            code:'',
+        }
+    },
+    methods:{
+        async login(){
+            // 1. 前端验证
+            const success = await this.$validator.validateAll() // 对所有表单项进行验证
+            if(success){ // 前端验证成功
+                // 2. 后端验证逻辑.....................          
+                alert('登录成功')
+                this.$router.replace('/home')
+            }else {// 前端验证失败
+                alert('前端验证失败')
+            }
+        }
+    }
   }
 </script>
 
@@ -74,11 +94,16 @@
                         width 335px
                         height 45px
                         bottom-border-1px(#ddd)
+                        position relative
                         input 
                             margin 18px 0
                             font-size 14px
                             border none
                             outline none
+                        span 
+                            position absolute
+                            left 0
+                            bottom -12px
                     .verificode
                         width 335px
                         height 45px
@@ -89,6 +114,10 @@
                             font-size 14px
                             border none
                             outline none
+                        span 
+                            position absolute
+                            left 0
+                            bottom -12px
                         button 
                             color #333
                             font-size 14px
@@ -122,6 +151,8 @@
                             line-height 45px
                             background #dd1a21
                             border-radius 4px
+                            border none 
+                            outline none 
                     .agree
                         margin-top 10px
                         display flex
