@@ -9,17 +9,11 @@
                     <form>
                         <div class="phoneLogin">
                             <div class="phonenumber">
-                                <input name="phone" v-validate="'required|phone'" v-model="phone" type="tel" maxlength="11" placeholder="请输入手机号">
-                                <span style="color: red;" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
+                                <input name="phone" placeholder="请输入手机号">
                             </div>
                             <div class="verificode">
-                                <input type="tel" v-model="code" maxlength="6" placeholder="请输入短信验证码" name="code" v-validate="'required|code'">
-                                <span style="color: red;" v-show="errors.has('code')">{{ errors.first('code') }}</span>
-                                <button @click.prevent="getCode"
-                                        :disabled="!rightPhoneNumber || countDownTime > 0" 
-                                        class="get_verification"
-                                        :class="{rightPhone:rightPhoneNumber}"
-                                >{{countDownTime?`${countDownTime}s后重发`:`获取验证码`}}</button>
+                                <input type="tel" placeholder="请输入短信验证码">
+                                <button>获取验证码</button>
                             </div>
                             <div class="question">
                                 <a href="https://aq.reg.163.com/ydaq/offline">遇到问题？</a>
@@ -36,7 +30,7 @@
                     </form>
                 </div>
             </div>
-            <div class="otherWay">
+            <div class="otherWay" @click="$router.replace('/personal/mailLogin')">
                 <span>其他方式登录</span>
                 <i class="iconfont iconxuanxiangqiayoujiantou"></i>
             </div>
@@ -46,6 +40,7 @@
 
 <script>
   export default {
+    
   }
 </script>
 

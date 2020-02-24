@@ -22,27 +22,29 @@
         </div>
         <div class="right">
           <div class="cateListwrapper">
-            <div class="content" v-show="activeIndex==index" v-for="(item,index) in cateLists" :key="index">
-              <div class="pic">
-                <img :src="item.imgUrl">
-              </div>
-              <div class="goodsList">
-                <ul class="list" v-if="item.categoryList">
-                  <li class="goodItem" v-for="(categoryItem,index) in item.categoryList" :key="index">
-                    <img :src="categoryItem.bannerUrl">
-                    <div class="name">
-                      <span>{{categoryItem.name}}</span>
-                    </div>
-                  </li>
-                </ul>
-                <ul class="list" v-if="item.subCateList">
-                  <li class="goodItem" v-for="(subCateItem,index) in item.subCateList" :key="index">
-                    <img :src="subCateItem.wapBannerUrl">
-                    <div class="name">
-                      <span>{{subCateItem.name}}</span>
-                    </div>
-                  </li>
-                </ul>
+            <div class="cateScroll">
+              <div class="content" v-show="activeIndex==index" v-for="(item,index) in cateLists" :key="index">
+                <div class="pic">
+                  <img :src="item.imgUrl">
+                </div>
+                <div class="goodsList">
+                  <ul class="list" v-if="item.categoryList">
+                    <li class="goodItem" v-for="(categoryItem,index) in item.categoryList" :key="index">
+                      <img :src="categoryItem.bannerUrl">
+                      <div class="name">
+                        <span>{{categoryItem.name}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="list" v-if="item.subCateList">
+                    <li class="goodItem" v-for="(subCateItem,index) in item.subCateList" :key="index">
+                      <img :src="subCateItem.wapBannerUrl">
+                      <div class="name">
+                        <span>{{subCateItem.name}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -72,11 +74,11 @@
       this.cateNav = cateNav.categoryL1List
       this.cateLists = cateLists
       this.$nextTick(()=>{
-        new BScroll( '.left .cateNavwrapper', {
+        let leftScroll = new BScroll( '.left .cateNavwrapper', {
             scrollY: true,
             click: true
         })
-        new BScroll( '.right .cateListwrapper', {
+        let rightScroll = new BScroll( '.right .cateListwrapper', {
             scrollY: true,
             click: true
         })
@@ -166,43 +168,43 @@
       padding 15px 15px 10px
       .cateListwrapper
         height 549px
-        .content
-          width 264px
-          position absolute
-          left 15px
-          top 15px
-          .pic
+        .cateScroll
+          .content
+            // overflow hidden
+            // float right
             width 264px
-            height 96px
-            margin-bottom 15px
-            img
+            // height 800px
+            .pic
               width 264px
               height 96px
-          .goodsList
-            width 264px
-            height 437px 
-            .list
-              display flex
-              flex-wrap wrap
-              .goodItem
-                margin-bottom 4px
-                width 72px
-                height 108px
-                &:nth-child(3n+2)
-                  margin 0 17px 4px
-                img
-                  display block
+              margin-bottom 15px
+              img
+                width 264px
+                height 96px
+            .goodsList
+              width 264px
+              height 437px 
+              .list
+                display flex
+                flex-wrap wrap
+                .goodItem
+                  margin-bottom 4px
                   width 72px
-                  height 72px
-                  // background #edf
-                .name
-                  width 72px
-                  height 36px
-                  text-align center
-                  font-size 12px
-                  line-height 16px
-                  color #333
-                  
+                  height 108px
+                  &:nth-child(3n+2)
+                    margin 0 17px 4px
+                  img
+                    display block
+                    width 72px
+                    height 72px
+                  .name
+                    width 72px
+                    height 36px
+                    text-align center
+                    font-size 12px
+                    line-height 16px
+                    color #333
+                      
 
 
               

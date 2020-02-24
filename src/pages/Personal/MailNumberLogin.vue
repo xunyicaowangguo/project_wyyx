@@ -8,6 +8,7 @@
             <div class="userBoxContent">
                 <div class="mailNumber">
                     <input type="text" placeholder="邮箱账号">
+                    <!-- <span style="color: red;" v-show="errors.has('myemail')">{{ errors.first('myemail') }}</span> -->
                 </div>
                 <div class="pwd">
                     <input type="password" placeholder="密码">
@@ -21,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="otherWay">
+        <div class="otherWay" @click="$router.replace('/personal/phoneLogin')">
             <span>其他方式登录</span>
             <i class="iconfont iconxuanxiangqiayoujiantou"></i>
         </div>
@@ -31,6 +32,19 @@
 
 <script>
   export default {
+      data(){
+          return{
+            myemail:'',
+            pwd:'',
+          }
+      },
+    async mounted(){
+        // const success = await this.$validator.validateAll()
+        // if(success){
+
+        // }
+    }
+
   }
 </script>
 

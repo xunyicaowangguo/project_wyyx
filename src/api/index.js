@@ -15,8 +15,11 @@ export const getBuyNavList = () => ajax({
   url: '/getBuyNavList'
 })
 
-
-//
-// export const getCateList = () => ajax({
-//   url: '/xxx'
+/*  发送短信验证码 */
+// https://dl.reg.163.com/dl/yd/nlregssms
+// export const sendCode = ({phone}) => ajax({
+//   url:'https://dl.reg.163.com/dl/yd/nlregssms',
+//   params:{
+//       phone
+//   }
 // })
