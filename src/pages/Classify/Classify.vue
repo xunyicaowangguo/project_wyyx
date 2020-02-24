@@ -74,11 +74,11 @@
       this.cateNav = cateNav.categoryL1List
       this.cateLists = cateLists
       this.$nextTick(()=>{
-        let leftScroll = new BScroll( '.left .cateNavwrapper', {
+        new BScroll( '.left .cateNavwrapper', {
             scrollY: true,
             click: true
         })
-        let rightScroll = new BScroll( '.right .cateListwrapper', {
+        new BScroll( '.right .cateListwrapper', {
             scrollY: true,
             click: true
         })

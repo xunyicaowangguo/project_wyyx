@@ -15,9 +15,11 @@
           class="wf-content"
           :data-index="index"
           :data-id="item.id"
+          v-for="(topic,index) in item.topics"
+          :key="index"
         >
-          <div class="img-box" :style="{ 'padding-bottom': item.ratio }">
-            <img class="wf-img" src="https://yanxuan.nosdn.127.net/87f3077c32a6946ae644f6a6a8205fc1.png"/>
+          <div class="img-box" :style="{ 'padding-bottom': item.ratio }" >
+            <img class="wf-img" :src="topic.picUrl"/>
           </div>
         </div>
         <div class="wf-shade" v-if="item.showShade"></div>
